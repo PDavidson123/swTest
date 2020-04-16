@@ -11,7 +11,7 @@ class RegisterSpec extends BaseSpec {
         def loginPage = to LoginPage
 
         when: 'Kitöltöm a "CREATE AN ACCOUNT" blokkban az "Email address" mezőt egy még nem regisztrált email címmel és a "Create an account" funkciógombra kattintok.'
-        loginPage.registerEmailAddress = 'valami@vmiemail.hu'
+        loginPage.registerEmailAddress = 'fake@email.hu'
         loginPage.registerButton.click()
 
         then: 'Megjelenik a "Create an account" űrlap.'
@@ -36,19 +36,18 @@ class RegisterSpec extends BaseSpec {
         registerPage.addressLastName = 'Teszt'
         registerPage.addressCompany = 'Mipma'
         registerPage.addressAddress = 'asdf 123'
+        //registerPage.addressAddress2 = 'nemasd 321'
         registerPage.addressCity = 'Budapest'
         registerPage.addressState = 'Alabama'
-        registerPage.addressZip = '00000'
+        registerPage.addressZip = '12345'
         registerPage.addressCountry = 'United States'
-        registerPage.addressOther = 'lorem ipsum'
+        registerPage.addressOther = 'uina cer vauoc ervo ervj oouasbcn ce'
         registerPage.addressPhone = '55568423'
         registerPage.addressMobile = '864153684'
-        registerPage.addressAlias = 'Home'
-
+        registerPage.addressAlias = 'Otthon'
         registerPage.regButton.click()
 
         then: 'Megjelenik a felhasználó adatai felület: “My account”.'
-
         def myAccountPage = waitFor { at MyAccountPage }
         myAccountPage.header.text() == "MY ACCOUNT"
 

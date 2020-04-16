@@ -18,13 +18,11 @@ class RegisterPage extends Page {
         firstName { $('input[id="customer_firstname"]') }
         lastName { $('input[id="customer_lastname"]') }
         password { $('input[id="passwd"]') }
-
         dateOfBirth { module(Date) }
         newsletter { $('input[id="newsletter"]').module(Checkbox) }
         offers { $('input[id="optin"]').module(Checkbox) }
         regButton { $('button[id="submitAccount"]') }
         errorMessages(required: false) { $('div[class="alert alert-danger"]:first-of-type').module ErrorMessages }
-
         addressFirstName { $('input[id="firstname"]') }
         addressLastName { $('input[id="lastname"]') }
         addressCompany { $('input[id="company"]') }
