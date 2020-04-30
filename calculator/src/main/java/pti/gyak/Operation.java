@@ -8,7 +8,7 @@ public enum Operation {
     REMAINDER("%"),
     POWER("^"),
     SQRT("sqrt"),
-    clear("C");
+    CLEAR("C");
 
     private String text;
 
@@ -16,6 +16,7 @@ public enum Operation {
         this.text = text;
     }
 
+    @Override
     public String toString() {
         return text;
     }

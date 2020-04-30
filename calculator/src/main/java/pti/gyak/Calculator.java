@@ -4,11 +4,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class Calculator {
-    public static final String separator = " ";
+    public static final String SEPARATOR = "";
 
-    public Number result = 0;
-    public String expression = "";
-    static final List<String> history = Collections.EMPTY_LIST;
+    public Number getResult() {
+        return result;
+    }
+
+    private Number result = 0;
+    private String expression = "";
+    private List<String> history = Collections.emptyList();
 
     private Operation lastOperation;
 
@@ -22,21 +26,13 @@ public class Calculator {
                 } else if (lastOperation.equals(Operation.MULTIPLY)) {
                     result = result.doubleValue() * number.doubleValue();
                 } else if (lastOperation.equals(Operation.DIVIDE)) {
-                    if (number.doubleValue() != 0) {
-                        result = result.doubleValue() / number.doubleValue();
-                    } else {
-                        if (result.doubleValue() > 0) {
-                            result = Double.POSITIVE_INFINITY;
-                        } else {
-                            result = Double.NEGATIVE_INFINITY;
-                        }
-                    }
+                    result = result.doubleValue() / number.doubleValue();
                 } else if (lastOperation.equals(Operation.REMAINDER)) {
                     result = result.doubleValue() % number.doubleValue();
                 } else if (lastOperation.equals(Operation.POWER)) {
                     result = Math.pow(result.doubleValue(), number.doubleValue());
                 }
-                expression = expression + separator + lastOperation + separator + number;
+                expression = expression + SEPARATOR + lastOperation + SEPARATOR + number;
                 lastOperation = null;
             } else {
                 if (!expression.isEmpty()) {
@@ -58,27 +54,27 @@ public class Calculator {
                 result = Math.sqrt(result.doubleValue());
                 expression = operation + "(" + expression + ")";
                 lastOperation = null;
-            } else if (operation == Operation.clear) {
+            } else if (operation == Operation.CLEAR) {
                 result = 0;
                 expression = "";
                 lastOperation = null;
             }
             return this;
-        } else {
-            ;
         }
+
         return this;
     }
 
     public String getHistory() {
-        String s = "";
-        if (history.size() != 0)
-        for (String h: history) {
-            s += h + "\n";
+        StringBuilder s = new StringBuilder();
+        if (!history.isEmpty()) {
+            for (String h : history) {
+                s.append(h).append("\n");
+            }
         }
 
-        s += expression.toString() + " = " + resultString();
-        return s;
+        s.append(expression).append(" = ").append(resultString());
+        return s.toString();
     }
 
     private String resultString() {
